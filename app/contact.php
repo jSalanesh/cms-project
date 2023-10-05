@@ -17,7 +17,7 @@
         $headers = "From: webmaster@cmssalanesh.com";
 
         $result = mail($to,$subject,$body,$headers);
-        echo $result;
+        var_dump($result);
     }
     ?>
     <section id="login">
