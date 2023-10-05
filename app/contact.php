@@ -17,7 +17,6 @@
         $headers = "From: webmaster@cmssalanesh.com";
 
         $result = mail($to,$subject,$body,$headers);
-        echo $result;
     }
     ?>
     <section id="login">
@@ -34,7 +33,6 @@
                             <div class="form-group">
                                <textarea class="form-control" name="body" id="body" cols="50" rows="10"></textarea>
                             </div>
-                            <?php echo $result;?>
                             <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Submit">
                         </form>
 
