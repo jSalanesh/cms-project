@@ -15,7 +15,7 @@
         $subject = $_POST['subject'];
         $body = $_POST['body'];
 
-        $result = mail($to,$subject,$body,$headers);
+        $result = mail($to,$subject,$body);
         var_dump($result);
     }
     ?>
