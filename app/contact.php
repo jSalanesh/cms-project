@@ -14,7 +14,6 @@
         $to = "jpls9400@gmail.com";
         $subject = $_POST['subject'];
         $body = $_POST['body'];
-        $headers = "From: webmaster@cmssalanesh.com";
 
         $result = mail($to,$subject,$body,$headers);
         var_dump($result);
