@@ -1,6 +1,10 @@
 <?php include "includes/db.php"; ?>
 <?php include "includes/header.php"; ?>
-
+<?php //Import PHPMailer classes into the global namespace
+    //These must be at the top of your script, not inside a function
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;?>
 
 <!-- Navigation -->
 
@@ -11,12 +15,36 @@
 <div class="container">
     <?php
     if (isset($_POST['submit'])) {
-        $to = "jpls9400@gmail.com";
-        $subject = $_POST['subject'];
-        $body = $_POST['body'];
+    //Load Composer's autoloader
+    require 'vendor/autoload.php';
 
-        $result = mail($to,$subject,$body);
-        var_dump($result);
+    //Create an instance; passing `true` enables exceptions
+    $mail = new PHPMailer(true);
+    $subj = $_POST["subject"];
+    $body = $_POST["body"];    
+    try {
+        //Server settings
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'joseph.sala2001@gmail.com';                     //SMTP username
+        $mail->Password   = 'upvo fcvo qpck joqt';                               //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+        //Recipients
+        $mail->setFrom('joseph.sala2001@gmail.com');
+        $mail->addAddress('jpls9400@gmail.com');     //Add a recipient
+        //Content
+        $mail->Subject = $subj;
+        $mail->Body    = $body;
+
+        $mail->send();
+        echo 'Message has been sent';
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
     }
     ?>
     <section id="login">
