@@ -51,8 +51,6 @@ if (isset($_POST['update_user'])) {
     $stmt->execute();
     $stmt->close();
     header("Location: users.php");
-} else {
-    header("Location: index.php");
 }
 ?>
 <form action="" method="post" enctype="multipart/form-data">
